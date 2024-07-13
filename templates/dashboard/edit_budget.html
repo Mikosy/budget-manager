@@ -1,0 +1,45 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+{% block title %} Add income {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Add income</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" name="amount" step="0.01" value="{{ budget.amount }}" required>
+
+                        <label for="category">Category:</label>
+                        <select id="category" name="category">
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <button type="submit">Save</button>
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

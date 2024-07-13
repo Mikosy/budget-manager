@@ -1,0 +1,107 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+{% block title %} Add income {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+    #btn-close{
+        background-color: transparent;
+        border:none;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+  <div class="my-3">
+        <!-- Messages -->
+        <div class="row mx-auto">
+          <div class="col-md-4 col-sm-12">
+
+          </div>
+          <div class="text-center col-md-4 col-sm-12">
+          {% if messages %}
+          {% for message in messages %}
+              <div class="alert-{% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% endif %}-alert-dismissible fade show"  role="alert">
+                  {{ message }}
+                <button id="btn-close" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="tim-icons icon-simple-remove"></i></button>
+              </div>
+          {% endfor %}
+          {% endif %}
+          </div>
+
+        </div>
+        <!-- Messages End -->
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Add category</h5>
+                    <h5 class="title">you have {{remaining_percentage}}% remaining</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-11 pr-md-1">
+                                <div class="form-group">
+                                    <label>Category Name</label>
+                                    <input type="text" name="name" class="form-control" placeholder="name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11 pr-md-1">
+                                <div class="form-group">
+                                    <label>Percentage</label>
+                                    <input type="number" name="percentage" class="form-control" placeholder="%" id="inputField" onkeyup="fillInput(this.value)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-boxes mt-4 mb-5">
+                          <a href="#" id="btn1" onclick="setText('5')" class="input-boxes btn-fill btn-primary p-2 px-3 rounded">5%</a>
+                          <a href="#" id="btn2" onclick="setText('10')"  class="input-boxes btn-fill btn-primary p-2 px-3 rounded">10%</a>
+                          <a href="#" id="btn3" onclick="setText('15')" class="input-boxes btn-fill btn-primary p-2 px-3 rounded">15%</a>
+                          <a href="#" id="btn4" onclick="setText('20')" class="input-boxes btn-fill btn-primary p-2 px-3 rounded">20%</a>
+                          <a href="#" id="btn5" onclick="setText('25')" class="input-boxes btn-fill btn-primary p-2 px-3 rounded">25%</a>
+                          <a href="#" id="btn6" onclick="setText('30')" class="input-boxes btn-fill btn-primary p-2 px-3 rounded">30%</a>
+                          <a href="#" id="btn7" onclick="setText('35')" class="input-boxes btn-fill btn-primary p-2 px-3 rounded">35%</a>
+                          <a href="#" id="btn8" onclick="setText('40')" class="input-boxes btn-fill btn-primary p-2 px-3 rounded">40%</a>
+                          <a href="#" id="btn9" onclick="setText('45')" class="input-boxes btn-fill btn-primary p-2 px-3 rounded">45%</a>
+                          <a href="#" id="btn10" onclick="setText('50')" class="input-boxes btn-fill btn-primary p-2 px-3 rounded">50%</a>
+                        </div>
+
+                        {% if remaining_percentage == 0.00 %}
+
+                        {% else %}
+                        <div class="">
+                            <button type="submit" class="btn btn-fill btn-primary">Add Category</button>
+                        </div>
+                        {% endif %}
+                    </form>
+                    <script>
+                            function setText(text){
+                                document.getElementById('inputField').value = text;
+                            }
+
+                            function fillInput(value){
+                                document.getElementById('inputField').value = value;
+                            }
+                    </script>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "layouts/base.html" %}
+
+{% load humanize %}
+
+{% block title %} Tables {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header">
+          <h4 class="card-title"> Budget Allocation Table</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table tablesorter " id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>
+                    Category
+                  </th>
+                  <th>
+                    Amount
+                  </th>
+                  <th>
+                    Start Date
+                  </th>
+                  <th class="text-center">
+                    End Date
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for budget in budget_split %}
+                <tr>
+                  <td>
+                    {{ budget.category.name }}
+                  </td>
+                  <td>
+                    {{ budget.amount|intcomma }}
+                  </td>
+                  <td>
+                    {{ budget.period_start }}
+                  </td>
+                  <td class="text-center">
+                    {{ budget.period_end }}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
